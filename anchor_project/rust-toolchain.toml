@@ -1,0 +1,7 @@
+[toolchain]
+channel = "1.89.0"
+components = ["rustfmt", "clippy"]
+profile = "default"
+# Anchor 0.32.0 requires Rust 1.89.0+
+# proc-macro2 1.0.86+ requires Rust 1.78+ for SourceFile support
+

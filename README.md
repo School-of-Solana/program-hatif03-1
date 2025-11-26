@@ -1,95 +1,217 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/TzDKD5h9)
-![School of Solana](https://github.com/Ackee-Blockchain/school-of-solana/blob/master/.banner/banner.png?raw=true)
+# Votee - Decentralized Voting dApp on Solana
 
-## 📚Solana Program
-We are about halfway through the course, and you already have some experience with programming on Solana. It is time to create something on your own! You will be building a dApp that will serve as the culmination of everything you have learned so far. Feel free to implement whatever comes to your mind, (as long as it passes the requirements).
+A fully decentralized polling application built on the Solana blockchain that enables users to create polls, register candidates, and cast votes in a transparent and secure manner.
 
-**This does not mean that the School of Solana is coming to an end just yet!** There are still several exciting lectures ahead, as well as one security related task.
+## 🚀 Live Deployment
 
-### Task details
-This task consists of two parts:
-1. **Core of your dApp**
-    - A deployed Solana program.
-2. **Frontend**
-    - A simple frontend to interact with the dApp.
+- **Frontend**: https://votee-smoky.vercel.app/
+- **Program ID**: `8jEXKrgnFUstSuFvGBbn5tLU9GQQbteuvvAwBCGPyBee`
+- **Network**: Solana Devnet
+- **Explorer**: https://explorer.solana.com/address/8jEXKrgnFUstSuFvGBbn5tLU9GQQbteuvvAwBCGPyBee?cluster=devnet
 
-### Requirements
-- An Anchor program deployed on **Devnet** or **Mainnet**.
-- The Anchor program must use a PDA (Program Derived Address).
-- At least one TypeScript **test** for each Anchor program instruction. These tests should cover both **happy** and **unhappy** (intentional error-triggering) scenarios.
-- A simple **frontend** deployed using your preferred provider (for more info, check below).
-- A filled out **PROJECT_DESCRIPTION.md** file.
+## 📋 Project Structure
 
-### Ideas
-We highly recommend starting with something simple. Take time to think through your project and work on it in iterations. Do not try to implement everything at once!
+```
+program-hatif03-1/
+├── anchor_project/          # Solana program (smart contract)
+│   ├── programs/           # Rust program code
+│   ├── tests/              # Program tests
+│   └── migrations/         # Deployment scripts
+├── frontend/               # Next.js frontend application
+│   ├── src/
+│   │   ├── app/           # Next.js app directory
+│   │   └── lib/           # IDL and types
+│   └── public/            # Static assets
+└── docs/                   # Documentation files
+```
 
-Below is a list of few ideas to get you started:
-- **Social app**
-    - Instagram
-    - Giphy
-    - Friendtech
-    - Spotify
-- **Blog**
-- **Voting** ([D21 - Janeček method](https://www.ih21.org/en/guidelines))
-- **DeFi**
-    - Raffles
-    - Escrow
-    - Tipping
-    - Lending ([Save Documentation](https://docs.save.finance/))
-    - Liquid Staking ([Marinade Documentation](https://docs.marinade.finance/))
-    - Data Query with Pyth ([Pyth Documentation](https://docs.pyth.network/price-feeds))
-    - AMM ([Raydium Documentation](https://raydium.gitbook.io/raydium/))
-- **Gaming**
-    - Browser Game ([Gaming on Solana](https://solanacookbook.com/gaming/nfts-in-games.html#nfts-in-games))
+## 🛠️ Tech Stack
 
-### Deadline
-The deadline for this task is **Wednesday, November 19th, at 23:59 UTC**.
->[!CAUTION]
->Note that we will not accept submissions after the deadline.
+### Backend (Solana Program)
+- **Anchor Framework** v0.32.0
+- **Rust** (latest stable)
+- **Solana** Program Library
 
-### Submission
-There are two folders, one for the Anchor project, and one for the frontend. Push your changes to the **main** branch of **this** repository.
+### Frontend
+- **Next.js** 15.1.0
+- **TypeScript**
+- **React** 19.0.0
+- **Tailwind CSS**
+- **Solana Web3.js**
+- **@coral-xyz/anchor**
 
->[!IMPORTANT]
->It is essential that you fill out the `PROJECT_DESCRIPTION.md` template completely and accurately. This document will be used by AI for the initial evaluation, so provide detailed information about your project, including working links, clear descriptions, and technical implementation details.
+## 🚀 Quick Start
 
->[!NOTE]
->Your submission repository is public. Feel free to share the link to showcase your work!
+### Prerequisites
 
-### Evaluation
-The evaluation process is based on the **requirements**. If you meet the requirements, you pass the task!
+- [Rust](https://www.rust-lang.org/tools/install)
+- [Solana CLI](https://docs.solana.com/cli/install-solana-cli-tools)
+- [Anchor Framework](https://www.anchor-lang.com/docs/installation)
+- [Node.js](https://nodejs.org/) (v18 or later)
+- A Solana wallet (Phantom, Solflare, etc.)
 
->[!NOTE]
->The first round of evaluations will be conducted by AI to verify requirements before manual review. AI can make mistakes. If you believe you fulfilled all requirements but weren't graded correctly, please create a support ticket and we will resolve the issue.
+### 1. Clone the Repository
 
->[!CAUTION]
->We expect original work that demonstrates your understanding and creativity. While you may draw inspiration from examples covered in lessons and tasks, **direct copying is not acceptable**. If you choose to build upon an example from the School of Solana materials, you must significantly expand it with additional features, instructions, and functionality to showcase your learning progress. 
+```bash
+git clone <repository-url>
+cd program-hatif03-1
+```
 
-### Example Workflow
-Let's say you are going to implement the Twitter dApp as the Solana Program. Here's how the steps could look:
+### 2. Set Up the Solana Program
 
-**1.** Implement Twitter dApp using the Anchor framework.
+```bash
+cd anchor_project
+npm install
+anchor build
+```
 
-**2.** Test the Twitter dApp using the Anchor framework.
+### 3. Set Up the Frontend
 
-**3.** Deploy the Twitter dApp on the Solana Devnet.
+```bash
+cd frontend
+npm install
+```
 
-**4.** Using the create solana dapp template, implement frontend for the Twitter dApp.
+Create a `.env` file in the `frontend` directory:
 
-**5.** Publish Frontend using [Vercel](https://vercel.com). Ensure the deployment is publicly accessible.
+```env
+NEXT_PUBLIC_RPC_URL=https://api.devnet.solana.com
+```
 
-**6.** Fill out the PROJECT_DESCRIPTION.md template.
+### 4. Run the Application
 
-**7.** Submit the Twitter dApp using GitHub Classroom.
+**Frontend:**
+```bash
+cd frontend
+npm run dev
+```
 
-### Useful Links
-- [Vercel](https://vercel.com)
-- [Create Solana Dapp](https://github.com/solana-foundation/create-solana-dapp)
-- [Account Macro Constraints](https://docs.rs/anchor-lang/0.31.1/anchor_lang/derive.Accounts.html)
-- [Solana Developers Courses](https://solana.com/developers/courses)
+Visit http://localhost:3000
 
------
+**Program Tests:**
+```bash
+cd anchor_project
+anchor test
+```
 
-### Need help?
->[!TIP]
->If you have any questions, feel free to reach out to us on [Discord](https://discord.gg/z3JVuZyFnp).
+## 📖 Documentation
+
+- [Project Description](./PROJECT_DESCRIPTION.md) - Detailed project overview and architecture
+- [Deployment Guide](./DEPLOYMENT_GUIDE.md) - Step-by-step deployment instructions
+- [Next Steps](./NEXT_STEPS.md) - Post-deployment guide
+- [Frontend README](./frontend/README.md) - Frontend-specific documentation
+- [Anchor Project README](./anchor_project/README.md) - Program-specific documentation
+
+## ✨ Features
+
+- ✅ Create polls with custom descriptions and date ranges
+- ✅ Register candidates for polls
+- ✅ Vote for candidates (one vote per user per poll)
+- ✅ Real-time vote count updates
+- ✅ Wallet integration (Phantom, Solflare, etc.)
+- ✅ Transparent on-chain voting records
+- ✅ Date validation and voting constraints
+
+## 🔧 Development
+
+### Program Development
+
+```bash
+cd anchor_project
+
+# Build
+anchor build
+
+# Test
+anchor test
+
+# Deploy to devnet
+anchor deploy
+```
+
+### Frontend Development
+
+```bash
+cd frontend
+
+# Install dependencies
+npm install
+
+# Run dev server
+npm run dev
+
+# Build for production
+npm run build
+```
+
+## 🧪 Testing
+
+### Program Tests
+
+```bash
+cd anchor_project
+anchor test
+```
+
+Tests cover:
+- Happy path scenarios (initialize, create poll, register candidate, vote)
+- Error conditions (invalid dates, duplicate voting, etc.)
+
+### Frontend Testing
+
+The frontend can be tested by:
+1. Connecting a wallet to Devnet
+2. Initializing the program
+3. Creating polls
+4. Registering candidates
+5. Voting
+
+## 📝 Program Instructions
+
+1. **initialize**: Sets up global counter and registrations accounts
+2. **create_poll**: Creates a new poll with description and date range
+3. **register_candidate**: Registers a candidate for a specific poll
+4. **vote**: Casts a vote for a candidate in an active poll
+
+## 🔐 Security Features
+
+- Program Derived Addresses (PDAs) for deterministic account creation
+- One vote per user per poll enforcement
+- Date validation for poll periods
+- Account ownership validation
+- Candidate registration validation
+
+## 📊 Program Architecture
+
+The program uses PDAs extensively:
+- **Counter PDA**: Tracks total number of polls
+- **Registrations PDA**: Tracks total candidate registrations
+- **Poll PDA**: Stores poll metadata (one per poll)
+- **Candidate PDA**: Stores candidate info and vote count
+- **Voter PDA**: Tracks user votes (one per user per poll)
+
+See [PROJECT_DESCRIPTION.md](./PROJECT_DESCRIPTION.md) for detailed architecture documentation.
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📄 License
+
+MIT License
+
+## 🔗 Links
+
+- **Program Explorer**: https://explorer.solana.com/address/8jEXKrgnFUstSuFvGBbn5tLU9GQQbteuvvAwBCGPyBee?cluster=devnet
+- **Deployment Transaction**: https://explorer.solana.com/tx/4S2GDJcc4MT8Sc9piGrYYRnPYe5ZuMhzo4gxwi2bbNMSciJiQZy13QQfXPonmsHKUkPCQq3G1gAMsksaQcuTjEQ8?cluster=devnet
+
+## 📞 Support
+
+For issues or questions:
+1. Check the documentation files
+2. Review the troubleshooting sections in the guides
+3. Check Solana Explorer for program status
+
+---
+
+Built with ❤️ on Solana
