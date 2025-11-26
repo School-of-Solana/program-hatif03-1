@@ -9,12 +9,16 @@ export function ReactQueryProvider({ children }: { children: ReactNode }) {
       new QueryClient({
         defaultOptions: {
           queries: {
-            staleTime: 60 * 1000,
+            staleTime: 60 * 1000, // 1 minute
             refetchOnWindowFocus: false,
           },
         },
       })
   )
 
-  return <QueryClientProvider client={client}>{children}</QueryClientProvider>
+  return (
+    <QueryClientProvider client={client}>
+      {children}
+    </QueryClientProvider>
+  )
 }

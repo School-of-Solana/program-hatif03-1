@@ -22,7 +22,7 @@ export const getProvider = (
   sendTransaction: any
 ): Program<Votee> | null => {
   if (!publicKey || !signTransaction) {
-    // Wallet not connected is a normal state, don't log as error
+    // This is expected when wallet isn't connected, so use warn instead of error
     return null
   }
 
@@ -73,11 +73,18 @@ export const getCounter = async (program: Program<Votee>): Promise<BN> => {
 
     return counter.count
   } catch (error: any) {
-    // Handle network/RPC errors gracefully
-    if (error?.message?.includes('fetch') || error?.message?.includes('network')) {
-      console.warn('RPC connection failed. Make sure localnet validator is running.')
-      return new BN(-1)
+    // Check if the error is because the account doesn't exist (program not initialized)
+    if (
+      error?.message?.includes('Account does not exist') ||
+      error?.message?.includes('has no data') ||
+      error?.code === 'InvalidAccountData' ||
+      error?.code === 'AccountNotFound'
+    ) {
+      // Program not initialized - return -2 to distinguish from other errors
+      return new BN(-2)
     }
+    
+    // Other errors (RPC connection issues, etc.) - return -1
     console.error('Failed to retrieve counter:', error)
     return new BN(-1)
   }
@@ -247,18 +254,8 @@ export const vote = async (
 export const fetchAllPolls = async (
   program: Program<Votee>
 ): Promise<Poll[]> => {
-  try {
-    const polls = await program.account.poll.all()
-    return serializedPoll(polls)
-  } catch (error: any) {
-    // Handle network/RPC errors gracefully
-    if (error?.message?.includes('fetch') || error?.message?.includes('network')) {
-      console.warn('RPC connection failed. Make sure localnet validator is running.')
-      return []
-    }
-    console.error('Failed to fetch polls:', error)
-    return []
-  }
+  const polls = await program.account.poll.all()
+  return serializedPoll(polls)
 }
 
 export const fetchPollDetails = async (

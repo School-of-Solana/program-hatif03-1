@@ -31,8 +31,7 @@ const CandidateList = ({ candidates, pollAddress, pollId }: Props) => {
     if (!program || !publicKey) return
 
     fetchVotingStatus()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [program, publicKey, pollId])
+  }, [program, publicKey, candidates])
 
   const handleVote = async (candidate: Candidate) => {
     if (!program || !publicKey || voted) return

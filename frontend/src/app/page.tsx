@@ -16,10 +16,17 @@ import { toast } from 'react-toastify'
 
 export default function Page() {
   const [polls, setPolls] = useState<Poll[]>([])
-  const { publicKey, signTransaction, sendTransaction } = useWallet()
   const [isInitialized, setIsInitialized] = useState<boolean>(false)
-  const [rpcError, setRpcError] = useState<boolean>(false)
   const programReadOnly = useMemo(() => getReadonlyProvider(), [])
+
+  // useWallet must be called unconditionally - WalletProvider should be in the tree
+  // If it throws, it means WalletProvider is missing from the component tree
+  const wallet = useWallet()
+  const { publicKey, signTransaction, sendTransaction } = wallet || {
+    publicKey: null,
+    signTransaction: null,
+    sendTransaction: null,
+  }
 
   const program = useMemo(
     () => getProvider(publicKey, signTransaction, sendTransaction),
@@ -28,30 +35,19 @@ export default function Page() {
 
   const fetchData = async () => {
     try {
-      setRpcError(false)
-      const pollsData = await fetchAllPolls(programReadOnly)
-      setPolls(pollsData)
+      fetchAllPolls(programReadOnly).then((data) => setPolls(data as any))
       const count = await getCounter(programReadOnly)
-      // If count is -1, it means RPC connection failed
-      if (count.eq(new BN(-1))) {
-        setRpcError(true)
-        setIsInitialized(false)
-      } else {
-        setIsInitialized(count.gte(new BN(0)))
-      }
+      // -2 means program not initialized, -1 means RPC error, >= 0 means initialized
+      setIsInitialized(count.gte(new BN(0)))
     } catch (error) {
       console.error('Failed to fetch data:', error)
-      // Set default values on error
-      setPolls([])
       setIsInitialized(false)
-      setRpcError(true)
     }
   }
 
   useEffect(() => {
     if (!programReadOnly) return
     fetchData()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [programReadOnly])
 
   const handleInit = async () => {
@@ -81,20 +77,6 @@ export default function Page() {
 
   return (
     <div className="flex flex-col items-center py-10">
-      {rpcError && (
-        <div className="bg-yellow-100 border border-yellow-400 text-yellow-700 px-6 py-4 rounded-lg mb-6 max-w-2xl">
-          <p className="font-semibold">⚠️ RPC Connection Failed</p>
-          <p className="mt-2">
-            Make sure the Solana localnet validator is running. Start it with:
-          </p>
-          <code className="block mt-2 bg-yellow-50 p-2 rounded">
-            solana-test-validator
-          </code>
-          <p className="mt-2 text-sm">
-            Or update NEXT_PUBLIC_RPC_URL in your .env file to use a different RPC endpoint.
-          </p>
-        </div>
-      )}
       {isInitialized && polls.length > 0 && (
         <h2 className="bg-gray-800 text-white rounded-full px-6 py-2 text-lg font-bold mb-8">
           List of Polls

@@ -37,8 +37,7 @@ export default function PollDetails() {
     }
 
     fetchDetails()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [program, pollId])
+  }, [program, pollId, setPoll, setCandidates, dispatch])
 
   if (!poll) {
     return (

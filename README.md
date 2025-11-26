@@ -4,7 +4,7 @@ A fully decentralized polling application built on the Solana blockchain that en
 
 ## 🚀 Live Deployment
 
-- **Frontend**: https://votee-smoky.vercel.app/
+- **Frontend**: https://votee-solana.vercel.app/
 - **Program ID**: `8jEXKrgnFUstSuFvGBbn5tLU9GQQbteuvvAwBCGPyBee`
 - **Network**: Solana Devnet
 - **Explorer**: https://explorer.solana.com/address/8jEXKrgnFUstSuFvGBbn5tLU9GQQbteuvvAwBCGPyBee?cluster=devnet
@@ -202,6 +202,7 @@ MIT License
 
 ## 🔗 Links
 
+- **Live Frontend**: https://votee-solana.vercel.app/
 - **Program Explorer**: https://explorer.solana.com/address/8jEXKrgnFUstSuFvGBbn5tLU9GQQbteuvvAwBCGPyBee?cluster=devnet
 - **Deployment Transaction**: https://explorer.solana.com/tx/4S2GDJcc4MT8Sc9piGrYYRnPYe5ZuMhzo4gxwi2bbNMSciJiQZy13QQfXPonmsHKUkPCQq3G1gAMsksaQcuTjEQ8?cluster=devnet
 

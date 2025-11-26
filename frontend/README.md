@@ -2,6 +2,13 @@
 
 **Votee** is a decentralized polling application built on the Solana blockchain, allowing users to create polls, register candidates, and vote in a transparent and secure manner. It leverages modern technologies and blockchain infrastructure to provide an interactive and decentralized voting experience.
 
+## 🚀 Live Deployment
+
+- **Frontend**: https://votee-solana.vercel.app/
+- **Program ID**: `8jEXKrgnFUstSuFvGBbn5tLU9GQQbteuvvAwBCGPyBee`
+- **Network**: Solana Devnet
+- **Explorer**: https://explorer.solana.com/address/8jEXKrgnFUstSuFvGBbn5tLU9GQQbteuvvAwBCGPyBee?cluster=devnet
+
 ## Features
 
 - **Create Polls**: Users can create polls with descriptions, start dates, and end dates.

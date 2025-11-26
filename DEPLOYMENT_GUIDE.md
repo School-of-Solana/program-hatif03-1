@@ -385,7 +385,7 @@ Before submitting:
 - [x] Program deployed to Devnet
 - [x] Program ID updated in `lib.rs` and `Anchor.toml` (8jEXKrgnFUstSuFvGBbn5tLU9GQQbteuvvAwBCGPyBee)
 - [x] Frontend IDL updated with deployed program ID
-- [x] Frontend deployed and accessible (https://votee-smoky.vercel.app/)
+- [x] Frontend deployed and accessible (https://votee-solana.vercel.app/)
 - [ ] Program initialized on-chain (can be done via frontend)
 - [ ] Can create polls from frontend
 - [ ] Can register candidates from frontend

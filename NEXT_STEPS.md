@@ -2,10 +2,16 @@
 
 ## ✅ Deployment Complete!
 
-Your Anchor program has been successfully deployed to **Solana Devnet**:
+Your Anchor program and frontend have been successfully deployed:
+
+**Frontend:**
+- **Live URL**: https://votee-solana.vercel.app/
+
+**Solana Program (Devnet):**
 - **Program ID**: `8jEXKrgnFUstSuFvGBbn5tLU9GQQbteuvvAwBCGPyBee`
 - **Deployment Signature**: `4S2GDJcc4MT8Sc9piGrYYRnPYe5ZuMhzo4gxwi2bbNMSciJiQZy13QQfXPonmsHKUkPCQq3G1gAMsksaQcuTjEQ8`
 - **IDL Account**: `AEXVu8NQJaSrMVnScc4rgVuDYfnYDNV2utfBMavbuxib`
+- **Explorer**: https://explorer.solana.com/address/8jEXKrgnFUstSuFvGBbn5tLU9GQQbteuvvAwBCGPyBee?cluster=devnet
 
 ## 📋 Next Steps
 

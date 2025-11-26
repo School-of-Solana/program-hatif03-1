@@ -1,15 +1,28 @@
 'use client'
 
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'
+import { useWallet } from '@solana/wallet-adapter-react'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
 const Header = () => {
   const [isMounted, setIsMounted] = useState(false)
+  const wallet = useWallet()
 
   useEffect(() => {
     setIsMounted(true)
   }, [])
+
+  // Debug: Log wallet state
+  useEffect(() => {
+    if (isMounted && wallet) {
+      console.log('Wallet state:', {
+        connected: wallet.connected,
+        publicKey: wallet.publicKey?.toBase58(),
+        wallets: wallet.wallets?.length,
+      })
+    }
+  }, [isMounted, wallet])
 
   return (
     <header className="p-4 border-b border-gray-300 mb-4">
@@ -25,9 +38,11 @@ const Header = () => {
         </div>
 
         {isMounted && (
-          <WalletMultiButton
-            style={{ backgroundColor: '#F97316', color: 'white' }}
-          />
+          <div style={{ position: 'relative', zIndex: 1000 }}>
+            <WalletMultiButton
+              style={{ backgroundColor: '#F97316', color: 'white' }}
+            />
+          </div>
         )}
       </nav>
     </header>

@@ -1,6 +1,6 @@
 # Project Description
 
-**Deployed Frontend URL:** https://votee-smoky.vercel.app/
+**Deployed Frontend URL:** https://votee-solana.vercel.app/
 
 **Solana Program ID:** 8jEXKrgnFUstSuFvGBbn5tLU9GQQbteuvvAwBCGPyBee
 

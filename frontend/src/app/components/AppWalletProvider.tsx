@@ -21,29 +21,54 @@ export default function AppWalletProvider({
 }: {
   children: React.ReactNode
 }) {
-  // Use localnet in development, devnet in production
+  // Use RPC URL from environment, fallback to devnet
   const endpoint = useMemo(() => {
-    const rpcUrl = process.env.NEXT_PUBLIC_RPC_URL || 'http://127.0.0.1:8899'
-    // If it's a localnet URL, use it directly, otherwise use devnet
-    if (rpcUrl.includes('127.0.0.1') || rpcUrl.includes('localhost')) {
+    const rpcUrl = process.env.NEXT_PUBLIC_RPC_URL
+    
+    // If RPC URL is provided, use it directly
+    if (rpcUrl) {
       return rpcUrl
     }
+    
+    // Fallback to devnet cluster API
     return clusterApiUrl(WalletAdapterNetwork.Devnet)
   }, [])
 
   const wallets = useMemo(
-    () => [
-      // manually add any legacy wallet adapters here
-      new PhantomWalletAdapter(),
-      new SolflareWalletAdapter(),
-    ],
-    [] // wallets don't depend on network
+    () => {
+      const adapters = [
+        new PhantomWalletAdapter(),
+        new SolflareWalletAdapter(),
+      ]
+      
+      // Log wallet adapters for debugging
+      console.log('Initialized wallet adapters:', adapters.map(a => a.name))
+      
+      return adapters
+    },
+    []
   )
 
   return (
     <ConnectionProvider endpoint={endpoint}>
-      <WalletProvider wallets={wallets} autoConnect>
-        <WalletModalProvider>{children}</WalletModalProvider>
+      <WalletProvider 
+        wallets={wallets} 
+        autoConnect={false}
+        onError={(error) => {
+          // Only log non-user-cancelled errors
+          if (
+            error.name !== 'WalletConnectionError' && 
+            error.name !== 'WalletNotConnectedError' &&
+            error.name !== 'WalletNotReadyError' &&
+            error.message !== 'User rejected the request'
+          ) {
+            console.error('Wallet adapter error:', error)
+          }
+        }}
+      >
+        <WalletModalProvider>
+          {children}
+        </WalletModalProvider>
       </WalletProvider>
     </ConnectionProvider>
   )
